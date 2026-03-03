@@ -17,8 +17,14 @@ public class CardFactory {
         }
 
         try {
-            return Integer.parseInt(cardSymbol);
-        } catch (IllegalArgumentException exception) {
+            int number = Integer.parseInt(cardSymbol);
+
+            if (number < 2 || number > 10) {
+                throw new IllegalArgumentException("잘못된 카드 값입니다: " + cardSymbol);
+            }
+
+            return number;
+        } catch (NumberFormatException exception) {
             throw new IllegalArgumentException("잘못된 카드 값입니다: " + cardSymbol);
         }
 
