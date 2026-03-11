@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class BlackjackGame {
     private final Dealer dealer;
@@ -12,6 +13,7 @@ public class BlackjackGame {
     private final Deck deck;
 
     private BlackjackGame(Dealer dealer, Players players, Deck deck) {
+        validate(dealer, players, deck);
         this.dealer = dealer;
         this.players = players;
         this.deck = deck;
@@ -22,6 +24,12 @@ public class BlackjackGame {
         Players players = generatePlayers(names);
         Deck deck = Deck.create(strategy);
         return new BlackjackGame(dealer, players, deck);
+    }
+
+    private void validate(Dealer dealer, Players players, Deck deck) {
+        Objects.requireNonNull(dealer, "dealer 는 null 이 올 수 없습니다.");
+        Objects.requireNonNull(players, "players 는 null 이 올 수 없습니다.");
+        Objects.requireNonNull(deck, "deck 은 null 이 올 수 없습니다.");
     }
 
     private static Players generatePlayers(List<String> names) {
