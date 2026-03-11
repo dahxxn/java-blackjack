@@ -27,15 +27,15 @@ public class Players {
         return this.players.get(playerIndex).canHit();
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-
     public void hitPlayer(int index, TrumpCard card) {
         players.get(index).receiveCard(card);
     }
 
     public Player playerAt(int index) {
         return players.get(index);
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

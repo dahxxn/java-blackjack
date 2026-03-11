@@ -69,14 +69,6 @@ public class BlackjackGame {
         return GameResult.from(players, dealer);
     }
 
-    public Players getPlayers() {
-        return players;
-    }
-
-    public Dealer getDealer() {
-        return dealer;
-    }
-
     public Map<Player, MatchResult> getPlayerFinalResult() {
         Map<Player, MatchResult> playerResult = new LinkedHashMap<>();
         for (Player player : players.getPlayers()) {
@@ -97,5 +89,13 @@ public class BlackjackGame {
         return playerResults.values().stream()
                 .filter(result -> result == target)
                 .count();
+    }
+
+    public Players getPlayers() {
+        return players;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
     }
 }

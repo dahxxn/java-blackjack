@@ -16,8 +16,11 @@ public enum MatchResult {
         this.scoreMatcher = scoreMatcher;
     }
 
-    public String getDisplay() {
-        return display;
+    public static MatchResult of(Player player, Dealer dealer) {
+        return Arrays.stream(values())
+                .filter(result -> result.matches(player, dealer))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("매칭되는 결과가 없습니다."));
     }
 
     public boolean matches(Player player, Dealer dealer) {
@@ -30,15 +33,12 @@ public enum MatchResult {
         return scoreMatcher.test(compareScore(player, dealer));
     }
 
-    public static MatchResult of(Player player, Dealer dealer) {
-        return Arrays.stream(values())
-                .filter(result -> result.matches(player, dealer))
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("매칭되는 결과가 없습니다."));
-    }
-
     private int compareScore(Player player, Dealer dealer) {
         return player.score() - dealer.score();
+    }
+
+    public String getDisplay() {
+        return display;
     }
 }
 
