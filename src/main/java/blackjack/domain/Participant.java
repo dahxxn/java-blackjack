@@ -5,6 +5,8 @@ import java.util.Objects;
 
 public abstract class Participant {
     protected static final int BLACKJACK_THRESHOLD = 21;
+    protected static final int INITIAL_CARD_COUNT = 2;
+
     protected final Hand hand;
 
     protected Participant(Hand hand) {
@@ -43,7 +45,7 @@ public abstract class Participant {
     }
 
     public boolean isBlackjack() {
-        return countCards() == 2 && score() == BLACKJACK_THRESHOLD;
+        return countCards() == INITIAL_CARD_COUNT && score() == BLACKJACK_THRESHOLD;
     }
 
 }
