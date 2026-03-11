@@ -42,4 +42,8 @@ public abstract class Participant {
         hand.receive(card);
     }
 
+    public boolean isBlackjack() {
+        return countCards() == 2 && score() == BLACKJACK_THRESHOLD;
+    }
+
 }
