@@ -36,4 +36,8 @@ public class Parser {
         }
     }
 
+    public static Integer parseAmount(String input) {
+        notEmpty(input);
+        return Integer.parseInt(input);
+    }
 }
