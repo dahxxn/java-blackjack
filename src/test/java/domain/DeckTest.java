@@ -1,32 +1,21 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DeckTest {
 
     @Test
-    void Card_목록으로_생성할_수_있다() {
-        Deck deck = Deck.of(List.of(Card.of(Suits.HEART, Rank.ACE)));
+    void Deck생성_시_자동으로_카드뭉치를_생성후_섞는다() {
+        Deck deck = Deck.create(new RandomShuffleStrategy());
         assertThat(deck).isNotNull();
     }
 
     @Test
-    void Card_목록이_null이면_Deck_생성시_오류가_발생한다() {
-        assertThatThrownBy(() -> {
-            Deck.of(null);
-        }).isInstanceOf(IllegalArgumentException.class);
+    void Deck에서_카드를_한장_뽑는다() {
+        Deck deck = Deck.create(new RandomShuffleStrategy());
+        assertThat(deck.draw()).isNotNull();
     }
-
-    @Test
-    void Card_목록에_중복이_존재하면_Deck_생성시_오류가_발생한다() {
-        assertThatThrownBy(() -> {
-            Deck.of(List.of(Card.of(Suits.HEART, Rank.ACE), Card.of(Suits.HEART, Rank.ACE)));
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
 
 }

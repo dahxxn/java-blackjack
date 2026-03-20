@@ -1,17 +1,30 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Deck {
     private final List<Card> cards;
 
     private Deck(List<Card> cards) {
         validate(cards);
-        this.cards = cards;
+        this.cards = new ArrayList<>(cards);
     }
 
-    public static Deck of(List<Card> cards) {
+    public static Deck create(ShuffleStrategy shuffleStrategy) {
+        List<Card> cards = Arrays.stream(Suits.values())
+                .flatMap(suits -> Arrays.stream(Rank.values())
+                        .map(rank -> Card.of(suits, rank)))
+                .collect(Collectors.toList());
+
+        shuffleStrategy.shuffle(cards);
         return new Deck(cards);
+    }
+
+    public Card draw() {
+        return cards.removeFirst();
     }
 
     private void validate(List<Card> cards) {
