@@ -1,5 +1,8 @@
-package domain;
+package domain.card;
 
+import domain.Rank;
+import domain.ShuffleStrategy;
+import domain.Suits;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

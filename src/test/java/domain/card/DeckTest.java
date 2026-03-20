@@ -1,7 +1,8 @@
-package domain;
+package domain.card;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.RandomShuffleStrategy;
 import org.junit.jupiter.api.Test;
 
 class DeckTest {

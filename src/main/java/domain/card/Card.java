@@ -1,5 +1,7 @@
-package domain;
+package domain.card;
 
+import domain.Rank;
+import domain.Suits;
 import java.util.Objects;
 
 public class Card {

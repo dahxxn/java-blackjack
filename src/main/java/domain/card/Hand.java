@@ -1,5 +1,6 @@
-package domain;
+package domain.card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
@@ -7,7 +8,7 @@ public class Hand {
 
     private Hand(List<Card> initialCards) {
         validate(initialCards);
-        this.cards = initialCards;
+        this.cards = new ArrayList<>(initialCards);
     }
 
     public static Hand of(List<Card> cards) {
@@ -18,6 +19,10 @@ public class Hand {
         return cards.stream()
                 .mapToInt(Card::rankScore)
                 .sum();
+    }
+
+    public void receive(Card card) {
+        cards.add(card);
     }
 
     private void validate(List<Card> cards) {
