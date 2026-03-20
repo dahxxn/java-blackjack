@@ -14,6 +14,12 @@ public class Hand {
         return new Hand(cards);
     }
 
+    public int calculateScore() {
+        return cards.stream()
+                .mapToInt(Card::rankScore)
+                .sum();
+    }
+
     private void validate(List<Card> cards) {
         validateNotNull(cards);
     }

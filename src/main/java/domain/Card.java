@@ -50,8 +50,11 @@ public class Card {
             return false;
         }
 
-        final Card card = (Card) obj;
         return Objects.equals(this.hashCode(), obj.hashCode());
+    }
+
+    public int rankScore() {
+        return rank.getScore();
     }
 
 

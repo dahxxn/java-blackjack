@@ -27,5 +27,13 @@ class CardTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void Card의_rank_점수를_가져올_수_있다() {
+        Card card = Card.of(Suits.HEART, Rank.ACE);
+
+        int expected = 11;
+        assertThat(card.rankScore()).isEqualTo(expected);
+    }
+
 
 }
