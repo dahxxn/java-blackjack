@@ -8,4 +8,6 @@ public interface State {
     State stay();
 
     boolean isFinished();
+
+    int score();
 }

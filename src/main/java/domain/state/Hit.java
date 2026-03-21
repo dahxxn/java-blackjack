@@ -28,4 +28,6 @@ public class Hit extends Running {
     public State stay() {
         return new Stay(hand);
     }
+
+
 }

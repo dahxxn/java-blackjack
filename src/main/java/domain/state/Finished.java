@@ -24,4 +24,9 @@ abstract class Finished implements State {
     public boolean isFinished() {
         return true;
     }
+
+    @Override
+    public int score() {
+        return hand.calculateScore();
+    }
 }

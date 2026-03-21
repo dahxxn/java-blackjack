@@ -20,4 +20,9 @@ public abstract class Running implements State {
     public boolean isFinished() {
         return false;
     }
+
+    @Override
+    public int score() {
+        return hand.calculateScore();
+    }
 }
