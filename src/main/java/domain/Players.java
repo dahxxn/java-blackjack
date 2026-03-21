@@ -53,4 +53,10 @@ public class Players {
 
         }
     }
+
+    public List<PlayerResult> calculateResult(Dealer dealer) {
+        return players.stream()
+                .map(player -> new PlayerResult(player.name(), player.earningRate(dealer)))
+                .toList();
+    }
 }

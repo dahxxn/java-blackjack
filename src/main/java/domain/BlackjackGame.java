@@ -37,6 +37,12 @@ public class BlackjackGame {
         players.play(inputYesOrNoReader, deck);
     }
 
+
+    public GameResult calculateResult() {
+        return GameResult.from(players, dealer);
+    }
+
+
     private static Hand dealInitialHand(Deck deck) {
         return Hand.of(List.of(deck.draw(), deck.draw()));
     }
