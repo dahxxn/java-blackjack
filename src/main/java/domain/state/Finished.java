@@ -1,5 +1,6 @@
 package domain.state;
 
+import domain.EarningRate;
 import domain.card.Card;
 import domain.card.Hand;
 
@@ -29,4 +30,6 @@ abstract class Finished implements State {
     public int score() {
         return hand.calculateScore();
     }
+
+    public abstract EarningRate earningRate(Finished dealerState);
 }
