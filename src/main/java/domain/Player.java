@@ -36,6 +36,10 @@ public class Player {
         return name.name();
     }
 
+    public int score() {
+        return state.score();
+    }
+
     private static State stateFrom(Hand hand) {
         if (hand.isBlackjack()) {
             return new Blackjack(hand);

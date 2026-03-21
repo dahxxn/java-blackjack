@@ -58,5 +58,11 @@ class PlayerTest {
         assertThat(player.name()).isEqualTo("handa");
     }
 
+    @Test
+    void 플레이어의_현재_점수를_가져올_수_있다() {
+        Player player = Player.create(name, hand);
+        assertThat(player.score()).isEqualTo(20);
+    }
+
 
 }
