@@ -31,5 +31,19 @@ class HandTest {
         assertThat(hand.calculateScore()).isEqualTo(expected);
     }
 
+    @Test
+    void Card를_받을때_누적합이_버스트기준을_넘고_ACE를_갖고있다면_ACE를_1로_자동_계산한다() {
+        Hand hand = Hand.of(List.of(Card.of(Suits.HEART, Rank.ACE), Card.of(Suits.DIAMOND, Rank.TWO)));
+        hand.receive(Card.of(Suits.CLOVER, Rank.NINE));
+        assertThat(hand.calculateScore()).isEqualTo(12);
+    }
+
+    @Test
+    void Card를_받을때_ACE가_여러장이면서_버스트기준을_넘는다면_21이하가_되는순간_ACE_점수_전환을_멈춘다() {
+        Hand hand = Hand.of(List.of(Card.of(Suits.HEART, Rank.ACE), Card.of(Suits.DIAMOND, Rank.NINE)));
+        hand.receive(Card.of(Suits.CLOVER, Rank.ACE));
+        assertThat(hand.calculateScore()).isEqualTo(21);
+    }
+
 
 }

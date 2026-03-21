@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
+    private static final int BUST_THRESHOLD = 21;
+    private static final int ACE_DIFFERENCE = 10;
     private List<Card> cards;
 
     private Hand(List<Card> initialCards) {
@@ -16,9 +18,11 @@ public class Hand {
     }
 
     public int calculateScore() {
-        return cards.stream()
+        int totalScore = cards.stream()
                 .mapToInt(Card::rankScore)
                 .sum();
+
+        return adjustForAces(totalScore);
     }
 
     public void receive(Card card) {
@@ -33,6 +37,22 @@ public class Hand {
         if (cards == null) {
             throw new IllegalArgumentException("null 이 올 수 없습니다.");
         }
+    }
+
+    private int adjustForAces(int totalScore) {
+        int aceCount = countAces();
+        while (aceCount > 0 && totalScore > BUST_THRESHOLD) {
+            totalScore -= ACE_DIFFERENCE;
+            aceCount--;
+        }
+
+        return totalScore;
+    }
+
+    private int countAces() {
+        return (int) cards.stream()
+                .filter(Card::isAce)
+                .count();
     }
 
 }

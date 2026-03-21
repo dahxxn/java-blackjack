@@ -60,4 +60,10 @@ public class Card {
     }
 
 
+    public boolean isAce() {
+        if (rank == Rank.ACE) {
+            return true;
+        }
+        return false;
+    }
 }
