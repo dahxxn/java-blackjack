@@ -1,6 +1,6 @@
 package domain.state;
 
-import domain.Card;
+import domain.card.Card;
 
 public interface State {
     State draw(Card card);
