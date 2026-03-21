@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand {
-    private static final int BUST_THRESHOLD = 21;
+    private static final int BLACKJACK_THRESHOLD = 21;
     private static final int ACE_DIFFERENCE = 10;
+    private static final int INITIAL_CARD_COUNT = 2;
     private List<Card> cards;
 
     private Hand(List<Card> initialCards) {
@@ -29,6 +30,13 @@ public class Hand {
         cards.add(card);
     }
 
+    public boolean isBlackjack() {
+        if (cardsCount() == INITIAL_CARD_COUNT && calculateScore() == BLACKJACK_THRESHOLD) {
+            return true;
+        }
+        return false;
+    }
+
     private void validate(List<Card> cards) {
         validateNotNull(cards);
     }
@@ -41,7 +49,7 @@ public class Hand {
 
     private int adjustForAces(int totalScore) {
         int aceCount = countAces();
-        while (aceCount > 0 && totalScore > BUST_THRESHOLD) {
+        while (aceCount > 0 && totalScore > BLACKJACK_THRESHOLD) {
             totalScore -= ACE_DIFFERENCE;
             aceCount--;
         }
@@ -55,4 +63,7 @@ public class Hand {
                 .count();
     }
 
+    private int cardsCount() {
+        return cards.size();
+    }
 }

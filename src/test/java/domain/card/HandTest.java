@@ -45,5 +45,17 @@ class HandTest {
         assertThat(hand.calculateScore()).isEqualTo(21);
     }
 
+    @Test
+    void 현재상태가_블랙잭이면_isBlackjack이_true이다() {
+        Hand hand = Hand.of(List.of(Card.of(Suits.HEART, Rank.ACE), Card.of(Suits.DIAMOND, Rank.JACK)));
+        assertThat(hand.isBlackjack()).isTrue();
+    }
+
+    @Test
+    void 현재상태가_블랙잭이_아니면_isBlackjack이_false이다() {
+        Hand hand = Hand.of(List.of(Card.of(Suits.HEART, Rank.ACE), Card.of(Suits.DIAMOND, Rank.TWO)));
+        assertThat(hand.isBlackjack()).isFalse();
+    }
+
 
 }
