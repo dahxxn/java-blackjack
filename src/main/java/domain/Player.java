@@ -3,6 +3,7 @@ package domain;
 import domain.card.Card;
 import domain.card.Hand;
 import domain.state.Blackjack;
+import domain.state.Finished;
 import domain.state.Hit;
 import domain.state.State;
 
@@ -38,6 +39,13 @@ public class Player {
 
     public int score() {
         return state.score();
+    }
+
+    public EarningRate earningRate(Dealer dealer) {
+        if (!isFinished()) {
+            throw new IllegalStateException("플레이어가 아직 진행 중입니다");
+        }
+        return dealer.calculateEarningRate((Finished) state);
     }
 
     private static State stateFrom(Hand hand) {

@@ -4,7 +4,7 @@ import domain.EarningRate;
 import domain.card.Card;
 import domain.card.Hand;
 
-abstract class Finished implements State {
+public abstract class Finished implements State {
     protected final Hand hand;
 
     public Finished(Hand hand) {

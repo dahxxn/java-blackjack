@@ -64,5 +64,17 @@ class PlayerTest {
         assertThat(player.score()).isEqualTo(20);
     }
 
+    @Test
+    void 플레이어_블랙잭_딜러_스테이면_블랙잭_수익이다() {
+        Hand playerHand = Hand.of(List.of(Card.of(Suits.HEART, Rank.ACE), Card.of(Suits.SPADE, Rank.JACK)));
+        Hand dealerHand = Hand.of(List.of(Card.of(Suits.CLOVER, Rank.TEN), Card.of(Suits.DIAMOND, Rank.NINE)));
+
+        Player player = Player.create(Name.of("handa"), playerHand);
+        Dealer dealer = Dealer.create(dealerHand);
+        dealer.stay();
+
+        assertThat(player.earningRate(dealer)).isEqualTo(EarningRate.BLACKJACK);
+    }
+
 
 }
