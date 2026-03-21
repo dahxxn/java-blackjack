@@ -1,10 +1,7 @@
-package domain.state.run;
+package domain.state;
 
 import domain.card.Card;
 import domain.card.Hand;
-import domain.state.State;
-import domain.state.finish.Bust;
-import domain.state.finish.Stay;
 
 public class Hit extends Running {
     private final static int BLACKJACK = 21;
@@ -19,16 +16,16 @@ public class Hit extends Running {
         int scores = hand.calculateScore();
 
         if (scores > BLACKJACK) {
-            return new Bust();
+            return new Bust(hand);
         }
         if (scores == BLACKJACK) {
-            return new Stay();
+            return new Stay(hand);
         }
         return this;
     }
 
     @Override
     public State stay() {
-        return new Stay();
+        return new Stay(hand);
     }
 }

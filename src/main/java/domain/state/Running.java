@@ -1,8 +1,7 @@
-package domain.state.run;
+package domain.state;
 
 import domain.card.Card;
 import domain.card.Hand;
-import domain.state.State;
 
 public abstract class Running implements State {
     protected final Hand hand;
