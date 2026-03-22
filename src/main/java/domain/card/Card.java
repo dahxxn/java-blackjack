@@ -66,4 +66,12 @@ public class Card {
         }
         return false;
     }
+
+    public String rankName() {
+        return rank.name();
+    }
+
+    public String suitName() {
+        return suits.name();
+    }
 }

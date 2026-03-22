@@ -37,6 +37,10 @@ public class Hand {
         return false;
     }
 
+    public List<Card> cards() {
+        return cards;
+    }
+
     private void validate(List<Card> cards) {
         validateNotNull(cards);
     }

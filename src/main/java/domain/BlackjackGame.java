@@ -4,6 +4,7 @@ package domain;
 import domain.card.Deck;
 import domain.card.Hand;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class BlackjackGame {
@@ -33,13 +34,17 @@ public class BlackjackGame {
         }
     }
 
-    public void playPlayerTurn(Function<String, String> inputYesOrNoReader) {
-        players.play(inputYesOrNoReader, deck);
+    public void playPlayerTurn(Function<String, String> inputYesOrNoReader,
+                               Consumer<PlayerHandResult> handPrinter) {
+        players.play(inputYesOrNoReader, handPrinter, deck);
     }
-
 
     public GameResult calculateResult() {
         return GameResult.from(players, dealer);
+    }
+
+    public DealResult getDealResult() {
+        return DealResult.from(players, dealer);
     }
 
 

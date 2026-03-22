@@ -5,6 +5,7 @@ import domain.card.Deck;
 import domain.card.Hand;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class Players {
@@ -32,31 +33,48 @@ public class Players {
         return Hand.of(cards);
     }
 
-    public void play(Function<String, String> inputYesOrNoReader, Deck deck) {
+    public void play(Function<String, String> inputYesOrNoReader,
+                     Consumer<PlayerHandResult> handPrinter,
+                     Deck deck) {
         for (Player player : players) {
-            playerTurn(player, inputYesOrNoReader, deck);
+            playerTurn(player, inputYesOrNoReader, handPrinter, deck);
         }
     }
 
-    private void playerTurn(Player player, Function<String, String> inputYesOrNoReader, Deck deck) {
+    private void playerTurn(Player player,
+                            Function<String, String> inputYesOrNoReader,
+                            Consumer<PlayerHandResult> handPrinter,
+                            Deck deck) {
         while (!player.isFinished()) {
             String input = inputYesOrNoReader.apply(player.name());
             if (input.equals(HIT)) {
                 player.draw(deck.draw());
+                handPrinter.accept(new PlayerHandResult(player.name(), formatCards(player.cards())));
                 continue;
-            } else if (input.equals(STAY)) {
+            }
+            if (input.equals(STAY)) {
                 player.stay();
                 continue;
             }
-
             throw new IllegalArgumentException("y또는 n만 입력 가능합니다.");
-
         }
     }
 
     public List<PlayerResult> calculateResult(Dealer dealer) {
         return players.stream()
                 .map(player -> new PlayerResult(player.name(), player.earningRate(dealer)))
+                .toList();
+    }
+
+    public List<PlayerHandResult> calculateHandResult() {
+        return players.stream()
+                .map(p -> new PlayerHandResult(p.name(), formatCards(p.cards())))
+                .toList();
+    }
+
+    private List<String> formatCards(List<Card> cards) {
+        return cards.stream()
+                .map(card -> card.rankName() + card.suitName())
                 .toList();
     }
 }

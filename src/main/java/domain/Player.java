@@ -6,6 +6,7 @@ import domain.state.Blackjack;
 import domain.state.Finished;
 import domain.state.Hit;
 import domain.state.State;
+import java.util.List;
 
 public class Player {
     private State state;
@@ -46,6 +47,10 @@ public class Player {
             throw new IllegalStateException("플레이어가 아직 진행 중입니다");
         }
         return dealer.calculateEarningRate((Finished) state);
+    }
+
+    public List<Card> cards() {
+        return state.cards();
     }
 
     private static State stateFrom(Hand hand) {

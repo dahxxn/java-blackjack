@@ -6,6 +6,7 @@ import domain.state.Blackjack;
 import domain.state.Finished;
 import domain.state.Hit;
 import domain.state.State;
+import java.util.List;
 
 public class Dealer {
     private static final int DEALER_HIT_THRESHOLD = 16;
@@ -41,6 +42,10 @@ public class Dealer {
             throw new IllegalStateException("딜러가 아직 진행 중입니다");
         }
         return playerState.earningRate((Finished) state);
+    }
+
+    public List<Card> cards() {
+        return state.cards();
     }
 
     private static State stateFrom(Hand hand) {

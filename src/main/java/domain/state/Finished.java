@@ -3,6 +3,7 @@ package domain.state;
 import domain.EarningRate;
 import domain.card.Card;
 import domain.card.Hand;
+import java.util.List;
 
 public abstract class Finished implements State {
     protected final Hand hand;
@@ -32,4 +33,9 @@ public abstract class Finished implements State {
     }
 
     public abstract EarningRate earningRate(Finished dealerState);
+
+    @Override
+    public List<Card> cards() {
+        return hand.cards();
+    }
 }

@@ -2,6 +2,7 @@ package domain.state;
 
 import domain.card.Card;
 import domain.card.Hand;
+import java.util.List;
 
 public abstract class Running implements State {
     protected final Hand hand;
@@ -24,5 +25,10 @@ public abstract class Running implements State {
     @Override
     public int score() {
         return hand.calculateScore();
+    }
+
+    @Override
+    public List<Card> cards() {
+        return hand.cards();
     }
 }
